@@ -17,7 +17,7 @@ migrate = Migrate(app, db)
 class Tarefas(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(50), nullable=False)
-    hora = db.Column(db.Integer, nullable=False)
+    hora = db.Column(db.String(2), nullable=False)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -43,19 +43,16 @@ def editar_tarefa(tarefa_id):
     tarefa = Tarefas.query.get_or_404(tarefa_id)
     form = Formulario(obj=tarefa)
 
+
+    if form.validate_on_submit():
+        pass
+
     if request.method == "POST":
-        if form.validate_on_submit():
-            try:
-                form.populate_obj(tarefa)
-                db.session.commit()
-                flash('Tarefa editada com sucesso!', 'success')
-                return redirect(url_for("index"))
-            except Exception as e:
-                flash(f'Erro ao editar tarefa: {e}', 'danger')
-                logging.exception("Erro ao editar tarefa")
-
-    return render_template("editar_tarefa.html", form=form, tarefa=tarefa)
-
+        tarefa.nome = request.form["nome"]
+        tarefa.hora = request.form["hora"]
+        db.session.commit()
+        return redirect(url_for("index"))
+    return render_template("editar_tarefa.html", tarefa=tarefa, form=form)
 
 @app.route("/deletar_tarefa/<int:tarefa_id>", methods=["POST"])
 def deletar_tarefa(tarefa_id):
@@ -64,3 +61,4 @@ def deletar_tarefa(tarefa_id):
     db.session.commit()
     flash('Tarefa deletada com sucesso!', 'success')
     return redirect(url_for("index"))
+

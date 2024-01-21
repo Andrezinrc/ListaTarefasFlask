@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField
-from wtforms.validators import DataRequired, NumberRange
+from wtforms import StringField
+from wtforms.validators import DataRequired
 
 class Formulario(FlaskForm):
     nome = StringField('nome', validators=[DataRequired()])
-    hora = IntegerField('hora', validators=[DataRequired(), NumberRange(min=0)])
+    hora = StringField('hora', validators=[DataRequired()])
