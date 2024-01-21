@@ -2,10 +2,13 @@ from flask import Flask, render_template, redirect, flash, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from .form import Formulario
+from .database import meu_banco
 import logging
 
 app = Flask(__name__)
 conexao = "sqlite:///tarefas.db"
+
+meu_banco.append(conexao)
 
 app.config["SECRET_KEY"] = "amo-programar"
 app.config["SQLALCHEMY_DATABASE_URI"] = conexao
@@ -61,4 +64,3 @@ def deletar_tarefa(tarefa_id):
     db.session.commit()
     flash('Tarefa deletada com sucesso!', 'success')
     return redirect(url_for("index"))
-
