@@ -43,13 +43,19 @@ def editar_tarefa(tarefa_id):
     tarefa = Tarefas.query.get_or_404(tarefa_id)
     form = Formulario(obj=tarefa)
 
-    if form.validate_on_submit():
-        form.populate_obj(tarefa)
-        db.session.commit()
-        flash('Tarefa editada com sucesso!', 'success')
-        return redirect(url_for("index"))
+    if request.method == "POST":
+        if form.validate_on_submit():
+            try:
+                form.populate_obj(tarefa)
+                db.session.commit()
+                flash('Tarefa editada com sucesso!', 'success')
+                return redirect(url_for("index"))
+            except Exception as e:
+                flash(f'Erro ao editar tarefa: {e}', 'danger')
+                logging.exception("Erro ao editar tarefa")
 
     return render_template("editar_tarefa.html", form=form, tarefa=tarefa)
+
 
 @app.route("/deletar_tarefa/<int:tarefa_id>", methods=["POST"])
 def deletar_tarefa(tarefa_id):
