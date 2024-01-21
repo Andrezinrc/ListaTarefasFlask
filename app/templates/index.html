@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class="container mt-5">
+  {% if tarefa %}
+    <div class="alert alert-success">
+      Tarefa adicionada com sucesso!
+      <br>
+      Nome: {{ tarefa.nome }}                                                                        
+      <br>
+      Hora: {{ tarefa.hora }}
+    </div>
+  {% endif %}
+  <form action="" method="post" class="formulario mx-auto p-4" style="max-width: 400px;">
+    <h1 class="text-warning">Adicionar Tarefa</h1>
+    <div class="form-group">
+      <label class="text-light">Nome</label>
+      {{ form.nome(class="form-control bg-transparent text-light", placeholder="nome da tarefa") }}
+    </div>
+    <div class="form-group">
+      <label class="text-light">Hora</label>
+      {{ form.hora(class="form-control bg-transparent text-light", placeholder="horario da tarefa") }}
+    </div>
+    <div class="input-group">
+      <button type="submit" class="btn btn-warning btn-block">adicionar</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
