@@ -2,14 +2,10 @@ from flask import Flask, render_template, redirect, flash, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from .form import Formulario
-from .database import meu_banco
 import logging
 
 app = Flask(__name__)
 conexao = "sqlite:///tarefas.db"
-
-meu_banco.append(conexao)
-
 app.config["SECRET_KEY"] = "amo-programar"
 app.config["SQLALCHEMY_DATABASE_URI"] = conexao
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -25,7 +21,7 @@ class Tarefas(db.Model):
 @app.route("/", methods=["GET", "POST"])
 def index():
     form = Formulario()
-
+    
     if request.method == "POST" and form.validate_on_submit():
         try:
             tarefa = Tarefas(nome=form.nome.data, hora=form.hora.data)

@@ -4,17 +4,17 @@
 
 <div class="container mt-5">
   <form action="{{ url_for('editar_tarefa', tarefa_id=tarefa.id) }}" method="post" class="formulario mx-auto p-4" style="max-width: 400px;">
-    <h1 class="text-primary">Editar - <p class="text-light"> {{ tarefa["nome"] }}</p></h1>
+    <h1 class="text-light mb-5">Editar - <span class="text-primary">{{ tarefa["nome"] }}</span></h1>
     <div class="form-group">
       <label class="text-light">Nome</label>
-      {{ form.nome(class="form-control bg-transparent text-light", placeholder="nome da tarefa") }}
+      {{ form.nome(class="form-control bg-transparent text-light border-top-0 border-end-0 border-start-0", placeholder="nome da tarefa") }}
     </div>
-    <div class="form-group">
+    <div class="form-group mt-3">
       <label class="text-light">Hora</label>
-      {{ form.hora(class="form-control bg-transparent text-light", placeholder="horario da tarefa") }}
+      {{ form.hora(class="form-control bg-transparent text-light border-top-0 border-end-0 border-start-0", placeholder="horario da tarefa") }}
     </div>
     <div class="input-group mt-3">
-      <button type="submit" class="btn btn-primary btn-block">Editar</button>
+      <button type="submit" class="btn btn-primary btn-block w-100">Editar</button>
     </div>
   </form>
 </div>

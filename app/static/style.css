@@ -5,8 +5,14 @@
   font-family: sans-serif;
 }
 body{
-  background-color:  #292A37;
+  background-color: #292A37;
 }
 .formulario{
-  background-color:  #292A37;
+  background-color: #00000091;
+}
+.botao-adicionar{
+  margin-bottom: 20px;
+}
+.lista-tarefas{
+  background-color: #00000091;
 }
