@@ -13,15 +13,14 @@
         </div>
       {% endif %}
     </div>
-
     <h1 class="text-light text-center mb-5">Adicionar<span class="text-primary"> Tarefas</span></h1>
     <div class="form-group">
       <label class="text-light">Nome</label>
-      {{ form.nome(class="form-control bg-transparent text-light border-top-0 border-end-0 border-start-0", placeholder="nome da tarefa") }}
+      {{ form.nome(class="form-control bg-transparent text-light border-top-0 border-end-0 border-start-0", placeholder="Nome da Tarefa") }}
     </div>
     <div class="form-group mt-3">
       <label class="text-light">Hora</label>
-      {{ form.hora(class="form-control bg-transparent text-light border-top-0 border-end-0 border-start-0", placeholder="horario da tarefa") }}
+      {{ form.hora(class="form-control bg-transparent text-light border-top-0 border-end-0 border-start-0", placeholder="Horario da Tarefa") }}
     </div>
     {{ form.csrf_token }}
     <div class="input-group mt-3 botao-adicionar">
@@ -36,7 +35,7 @@
       <p class="text-center text-primary">Não há tarefas na lista</p>
     {% endif %}
     {% for tarefa in tarefas %}
-      <div class="alert alert-info">
+      <div class="alert alert-info lista">
         Nome da Tarefa: {{ tarefa.nome }}
         <br>
         Hora: {{ tarefa.hora }}h </span>
