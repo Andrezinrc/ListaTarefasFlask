@@ -19,8 +19,13 @@ class Tarefas(db.Model):
     nome = db.Column(db.String(50), nullable=False)
     hora = db.Column(db.String(2), nullable=False)
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def index():
+  tarefas = Tarefas.query.all()  # Recupera todas as tarefas do banco de dados
+  return render_template('index.html',tarefas=tarefas)
+
+@app.route("/criar_tarefa", methods=["GET", "POST"])
+def criar_tarefa():
     form = Formulario()  # Cria uma instância do formulário
 
     if request.method == "POST" and form.validate_on_submit():
@@ -35,10 +40,7 @@ def index():
             flash(f'Erro ao adicionar tarefa: {e}', 'danger')
             logging.exception("Erro ao adicionar tarefa")
 
-    tarefas = Tarefas.query.all()  # Recupera todas as tarefas do banco de dados
-    logging.debug("Tarefas no banco de dados: %s", tarefas)
-
-    return render_template("index.html", form=form, tarefas=tarefas)
+    return render_template("criar_tarefa.html", form=form)
 
 @app.route("/editar_tarefa/<int:tarefa_id>", methods=["GET", "POST"])
 def editar_tarefa(tarefa_id):

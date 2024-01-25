@@ -1,32 +1,6 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-  <form action="{{ url_for('index') }}" method="post" class="formulario mx-auto p-4" style="max-width: 400px;">
-    <div class="container mt-3">
-      {% if form.is_submitted() and form.validate() %}
-        <div class="alert alert-success">
-           Tarefa adicionada com sucesso!
-           <br>
-           Nome: {{ form.nome.data }}
-           <br>
-           Hora: {{ form.hora.data }}
-        </div>
-      {% endif %}
-    </div>
-    <h1 class="text-light text-center mb-5">Adicionar<span class="text-primary"> Tarefas</span></h1>
-    <div class="form-group">
-      <label class="text-light">Nome</label>
-      {{ form.nome(class="form-control bg-transparent text-light border-top-0 border-end-0 border-start-0", placeholder="Nome da Tarefa") }}
-    </div>
-    <div class="form-group mt-3">
-      <label class="text-light">Hora</label>
-      {{ form.hora(class="form-control bg-transparent text-light border-top-0 border-end-0 border-start-0", placeholder="Horario da Tarefa") }}
-    </div>
-    {{ form.csrf_token }}
-    <div class="input-group mt-3 botao-adicionar">
-      <button type="submit" class="btn btn-primary btn-block w-100">Adicionar</button>
-    </div>
-  </form>
 
   <div class="mx-auto p-4 lista-tarefas" style="max-width: 400px;">
     {% if tarefas %}
@@ -47,5 +21,15 @@
         </div>
       </div>
     {% endfor %}
+    {% if not tarefas %}
+      <div class="text-center">
+        <a class="text-light" href="/criar_tarefa">Criar Tarefa</a>
+      </div>
+    {% else %}
+      <div class="text-center">
+        <a class="text-light" href="/criar_tarefa">Adcionar Mais Tarefas</a>
+      </div>
+    {% endif %}
   </div>
+
 {% endblock %}

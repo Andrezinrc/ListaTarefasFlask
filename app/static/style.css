@@ -5,15 +5,20 @@
   font-family: sans-serif;
 }
 body{
-  background-color: #292A37;
+  background-color: #121328;
 }
 .formulario{
-  background-color: #00000091;
+  max-width: 400px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 .botao-adicionar{
   margin-bottom: 10px;
 }
-.lista-tarefas{
-  background-color: #00000091;
+@media screen and (max-width: 400px){
+  .formulario{
+    width: 350px;
+  }
 }
-

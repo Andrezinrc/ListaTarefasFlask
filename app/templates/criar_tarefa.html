@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+  <form action="{{ url_for('criar_tarefa') }}" method="post" class="formulario max-auto p-4">
+    <div class="container mt-3">
+      {% if form.is_submitted() and form.validate() %}
+        <div class="alert alert-success">
+           Tarefa adicionada com sucesso!
+           <br>
+           Nome: {{ form.nome.data }}
+           <br>
+           Hora: {{ form.hora.data }}
+        </div>
+      {% endif %}
+    </div>
+    <h1 class="text-light text-center mb-5">Adicionar<span class="text-primary"> Tarefas</span></h1>
+    <div class="form-group">
+      <label class="text-light">Nome</label>
+      {{ form.nome(class="form-control bg-transparent text-light border-top-0 border-end-0 border-start-0", placeholder="Nome da Tarefa") }}
+    </div>
+    <div class="form-group mt-3">
+      <label class="text-light">Hora</label>
+      {{ form.hora(class="form-control bg-transparent text-light border-top-0 border-end-0 border-start-0", placeholder="Horario da Tarefa") }}
+    </div>
+    {{ form.csrf_token }}
+    <div class="input-group mt-3 botao-adicionar">
+      <button type="submit" class="btn btn-primary btn-block w-100">Adicionar</button>
+    </div>
+    <div class="form-group text-center">
+      <a class="text-light" href="/">Minhas Tarefas</a>
+    </div>
+  </form>
+
+{% endblock %}
